@@ -19,40 +19,40 @@ class Cart extends Db{
 		$_SESSION["cart"] = $this->_cart;	
 	}
 	/*
-	Them san pham có mã $id và số lương $quantity vào giỏ hàng
+	Them san pham có mã $masp và số lương $quantity vào giỏ hàng
 	*/
 	
-	public function bookExist($book_id)
+	public function spExist($masp)
 	{
-		$sql="select * from book where book_id = '$book_id' ";
+		$sql="select * from sanpham where masp = '$masp' ";
 		$temp = new Db();
 		$temp->exeQuery($sql);
 		if ($temp->getRowCount()==0) return false;
 		return true;
 	}
-	public function add($id, $quantity=1)
+	public function add($masp, $quantity=1)
 	{	
-		if ($id=="" || $quantity<1) return;
-		if (!$this->bookExist($id)) return;
+		if ($masp=="" || $quantity<1) return;
+		if (!$this->spExist($masp)) return;
 		print_r($this->_cart);		
-		if (isset($this->_cart[$id]))
-			$this->_cart[$id]+=	$quantity;
-		else $this->_cart[$id]=	$quantity;
+		if (isset($this->_cart[$masp]))
+			$this->_cart[$masp]+=	$quantity;
+		else $this->_cart[$masp]=	$quantity;
 		$_SESSION["cart"] = $this->_cart;	
 		$this->_num_item = array_sum($this->_cart);
-		echo "Da them $id - $quantity ";
+		echo "Da them $masp - $quantity ";
 		echo "<script language=javascript>window.location='index.php?mod=cart';</script>";//Chuyển trình duyệt web tới trang hiển thị cart
 	}
 	
-	public function remove($id)
+	public function remove($masp)
 	{
-		unset($this->_cart[$id]);
+		unset($this->_cart[$masp]);
 		$this->_num_item = array_sum($this->_cart);
 		$_SESSION["cart"] = $this->_cart;	
 	}
-	public function edit($id, $quantity)
+	public function edit($masp, $quantity)
 	{
-		$this->_cart[$id]	= $quantity;
+		$this->_cart[$masp]	= $quantity;
 		$this->_num_item = array_sum($this->_cart);
 		$_SESSION["cart"] = $this->_cart;	
 	}
@@ -64,9 +64,9 @@ class Cart extends Db{
 			return;
 		}
 		echo "<table border=\"1\"><tr><td>ID</td><td>Số lượng</td></tr>";
-		foreach($this->_cart as $id=>$quantity)
+		foreach($this->_cart as $masp=>$quantity)
 		{
-				echo "<tr><td>$id</td><td>$quantity</td></tr>";
+				echo "<tr><td>$masp</td><td>$quantity</td></tr>";
 		}
 		
 		echo "</table>";	
@@ -75,9 +75,9 @@ class Cart extends Db{
 		
 	}
 	
-	function setCartInfo( $quantity=0, $id="cart_sumary")
+	function setCartInfo( $quantity=0, $masp="cart_sumary")
 	{
-		echo "<script language=javascript> document.getElementById('$id').innerHTML =$quantity; </script>";
+		echo "<script language=javascript> document.getElementById('$masp').innerHTML =$quantity; </script>";
 	}
 
 }

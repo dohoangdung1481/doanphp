@@ -13,52 +13,35 @@ $cart = new Cart();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Database!</title>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
 <table width="90%" border="1" align="center">
   <tr>
-    <td colspan="3"><?php
+    <td colspan="1"><?php 
     include "include/header.php";
 	?></td>
   </tr>
   <tr>
-    <td width="29%" valign="top">
-   
-			<div class='boxleft'><?php
-			?>
-            </div>
-            <div class='boxleft'>
-            </div>
-	</td>
-    <td width="42%" valign="top">
-    	<?php
+  <td colspan="5">
+  <?php
 			
 			include "mod.php";
 			
-			?>
-    </td>
-    <!-- hien thi chi tiet san pham-->
-    <td width="29%" valign="top"><?php
-    $news = $db->exeQuery("select * from news where hot=1 limit 0, 10");
-	foreach($news as $r)
-	{
-		?>
-        <div class=news>
-        	<a href="index.php?mod=news&ac=detail&id=<?php echo $r["id"];?>">
-				<?php echo $r["title"];?>
-             </a>
-        </div>
-        <?php	
-		
-	}
-	?>
-    </td>
+			?></td>
   </tr>
   <tr>
-    <td colspan="3">&nbsp;</td>
+    <td colspan="2"><?php include "include/footer.php"; ?></td>
   </tr>
 </table>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+</script>
 </html>

@@ -7,7 +7,7 @@ if (!defined("ROOT"))
 	$ac=getIndex("ac", "home");
 	if ($ac=="home")
 		{
-			include ROOT."/module/book/home.php";
+			include ROOT."/module/sanpham/home.php";
 		}
 	if ($ac=="list")
 		{
@@ -15,11 +15,11 @@ if (!defined("ROOT"))
 		}
 	if ($ac=="detail")
 		{
-			include ROOT."/module/book/detail.php";	
+			include ROOT."/module/sanpham/detail.php";	
 		}
 	if ($ac=="search")
 		{
-			include ROOT."/module/book/search.php";	
+			include ROOT."/module/sanpham/search.php";	
 		}
 
 ?>
