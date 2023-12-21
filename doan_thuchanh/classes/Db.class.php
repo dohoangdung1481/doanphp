@@ -61,7 +61,13 @@ class Db{
 			$data = $this->exeQuery($sql, $arr, PDO::FETCH_BOTH);
 			return $data[0][0];
 		}
-		
+		public function getOneRow($sql, $arr = array(), $mode = PDO::FETCH_ASSOC)
+        {
+            $data = $this->exeQuery($sql, $arr, $mode);
+            if (count($data) == 0)
+                return null;
+            return $data[0];
+        }
 	
 	
 	}

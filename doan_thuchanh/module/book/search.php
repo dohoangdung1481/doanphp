@@ -4,17 +4,17 @@ if (!defined("ROOT"))
 	echo "Err!"; exit;	
 }
 $key = getIndex("key", "");
-$sql ="select * from book where book_name like :key ";
+$sql ="select * from sanpham where tensp like :key ";
 $arr = array(":key"=> "%".$key."%");
 $page = Utils::getIndex("page", 1);
-$list = $book->search($page);
+$list = $sp->search($page);
 
-echo "Page $page/ ".$book->getPageCount() ;
+echo "Page $page/ ".$sp->getPageCount() ;
 foreach($list as $r)
 {
 	?>
-    <div class=book>
-    	<?php echo $r["book_name"];?>
+    <div class=sp>
+    	<?php echo $r["tensp"];?>
     </div>
     <?php	
 }
@@ -22,9 +22,9 @@ foreach($list as $r)
 ?>
 <div>
 <?php
-for($i=1; $i<=$book->getPageCount(); $i++)
+for($i=1; $i<=$sp->getPageCount(); $i++)
 {
-	echo "<a href='index.php?mod=book&ac=search&key=$key&page=$i'>$i</a>&nbsp;";	
+	echo "<a href='index.php?mod=sp&ac=search&key=$key&page=$i'>$i</a>&nbsp;";	
 }
 ?>
 </div>

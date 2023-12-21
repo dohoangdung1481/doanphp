@@ -75,12 +75,12 @@ class SanPham extends Db {
 				$n  = $this->count($sql, $arr);
 				$this->_page_count = ceil($n/$this->_page_size);
 		$sql="SELECT
-				sanpham.sanpham_id,
+				sanpham.masp,
 				sanpham.tensp,
 				sanpham.mota,
 				sanpham.gia,
 				sanpham.anh,
-				sanpham.maxx,
+				sanpham.maxx,	
 				sanpham.maloai,
 				phanloai.tenloai,
 				xuatxu.nuocxx

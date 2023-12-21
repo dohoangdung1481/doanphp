@@ -57,28 +57,51 @@ class Cart extends Db{
 		$_SESSION["cart"] = $this->_cart;	
 	}
 	
+	// public function show()
+	// {
+	// 	if (Count($this->_cart)==0) 
+	// 	{	echo "Giỏ hàng rỗng";
+	// 		return;
+	// 	}
+	// 	echo "<table border=\"1\"><tr><td>ID</td><td>Số lượng</td></tr>";
+	// 	foreach($this->_cart as $masp=>$quantity)
+	// 	{
+	// 			echo "<tr><td>$masp</td><td>$quantity</td></tr>";
+	// 	}
+		
+	// 	echo "</table>";	
+	// 	$this->setCartInfo($this->getNumItem());
+	// 	//Update số lượng item của cart trong header.php. Có thể không sử dụng method này nếu mỗi lần thêm xong, chuyển trang về mod=cart.
+		
+	// }
 	public function show()
-	{
-		if (Count($this->_cart)==0) 
-		{	echo "Giỏ hàng rỗng";
-			return;
-		}
-		echo "<table border=\"1\"><tr><td>ID</td><td>Số lượng</td></tr>";
-		foreach($this->_cart as $masp=>$quantity)
-		{
-				echo "<tr><td>$masp</td><td>$quantity</td></tr>";
-		}
-		
-		echo "</table>";	
-		$this->setCartInfo($this->getNumItem());
-		//Update số lượng item của cart trong header.php. Có thể không sử dụng method này nếu mỗi lần thêm xong, chuyển trang về mod=cart.
-		
-	}
+    {
+        $sql = "SELECT * FROM sanpham WHERE masp IN (";
+        $ids = array_keys($this->_cart);
+
+        if (!empty($ids)) {
+            $sql .= implode(',', array_fill(0, count($ids), '?'));
+            $sql .= ")";
+            $temp = new Db();
+            return $temp->exeQuery($sql, $ids);
+        }
+
+        return []; // Return an empty array or handle the case when there are no items in the cart
+    }
+	public function getQuantity($masp)
+    {
+        return $this->_cart[$masp];
+    }
 	
-	function setCartInfo( $quantity=0, $masp="cart_sumary")
-	{
-		echo "<script language=javascript> document.getElementById('$masp').innerHTML =$quantity; </script>";
-	}
+	public function getTotal()
+    {
+        $total = 0;
+        $list = $this->show();
+        foreach ($list as $item) {
+            $total += $item["gia"] * $this->_cart[$item["masp"]];
+        }
+        return $total;
+    }
 
 }
 ?>

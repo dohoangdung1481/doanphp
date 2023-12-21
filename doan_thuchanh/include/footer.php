@@ -1,6 +1,6 @@
 <div class="container my-5">
 
-  <footer class="bg-primary text-center text-lg-start text-white">
+  <footer class="bg-dark text-center text-lg-start text-white">
     <!-- Grid container -->
     <div class="container p-4">
       <!--Grid row-->
